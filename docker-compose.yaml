@@ -83,7 +83,15 @@ x-airflow-common:
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
     # The following line can be used to set a custom config file, stored in the local config folder
     AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
-  platform: linux/arm64
+    # Pipeline settings (see README "Configuration")
+    ULTA_BASE_URL: ${ULTA_BASE_URL:-https://www.ulta.com/shop/fragrance/all}
+    ULTA_MAX_PAGES: ${ULTA_MAX_PAGES:-500}
+    ULTA_DETAIL_BATCH_SIZE: ${ULTA_DETAIL_BATCH_SIZE:-100}
+    MONGO_ROOT_USER: ${MONGO_ROOT_USER}
+    MONGO_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    MONGO_DB: ${MONGO_DB:-parfum}
+    MONGO_HOST: mongodb
+    MONGO_PORT: "27017"  # in-network port; ${MONGO_PORT} only sets the host-side mapping
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
