@@ -1,0 +1,8 @@
+include/*
+.env
+*/__pycache__/*
+logs/*
+__pycache__/
+.venv/
+tests/unit/output/
+mongo_results.json

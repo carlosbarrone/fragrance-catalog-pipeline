@@ -1,0 +1,17 @@
+[project]
+name = "fragrance-catalog-pipeline"
+version = "0.1.0"
+description = "Airflow pipeline that scrapes, validates and loads fragrance product data into MongoDB"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "bs4>=0.0.2",
+    "pymongo>=4.13.2",
+    "pydantic>=2.13.4",
+    "requests>=2.33.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+]

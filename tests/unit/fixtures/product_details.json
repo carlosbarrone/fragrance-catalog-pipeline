@@ -1,0 +1,27 @@
+{
+  "main_image": null,
+  "variants": [
+    {
+      "sku_id": "2653334",
+      "volume_ml": 30,
+      "price": 99,
+      "image": null
+    },
+    {
+      "sku_id": "2653335",
+      "volume_ml": 50,
+      "price": 138,
+      "image": null
+    },
+    {
+      "sku_id": "2653336",
+      "volume_ml": 80,
+      "price": 165,
+      "image": "https://media.ultainc.com/i/ulta/2653336?w=500&h=500"
+    }
+  ],
+  "currency": "USD",
+  "description": "A joyful floral-fruity fragrance that celebrates freedom and self-expression. Exotic dragon fruit, rich cherry peony and warm solar vanilla create a playful, feel-good scent made for living life loud and unapologetically.",
+  "ingredients_text": "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Tetramethyl Acetyloctahydronaphthalenes, Hexamethylindanopyran, Citrus Aurantium Bergamia (Bergamot) Peel Oil, Linalyl Acetate, Linalool, Limonene, Coumarin, Butyl Methoxydibenzoylmethane, Benzyl Salicylate, Vanillin, Pinene, Pogostemon Cablin Oil, A",
+  "source_url": "https://www.ulta.com/p/la-bomba-eau-de-parfum-pimprod2057642?sku=2653336"
+}
