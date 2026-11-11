@@ -38,16 +38,29 @@ def _parse_price_value(value) -> float | None:
     return None
 
 
+def _normalize_image(value) -> str | None:
+    """Reduce an image field (str, list of str/objects, or {url|src|href}) to one URL."""
+    if isinstance(value, str):
+        return value.strip() or None
+    if isinstance(value, list):
+        for item in value:
+            url = _normalize_image(item)
+            if url:
+                return url
+        return None
+    if isinstance(value, dict):
+        for nested_key in ("url", "src", "href", "contentUrl"):
+            url = _normalize_image(value.get(nested_key))
+            if url:
+                return url
+    return None
+
+
 def _extract_variant_image(variant: dict) -> str | None:
     for key in ("imageUrl", "image", "thumbnail", "swatchImage"):
-        image_val = variant.get(key)
-        if isinstance(image_val, str) and image_val.strip():
-            return image_val
-        if isinstance(image_val, dict):
-            for nested_key in ("url", "src", "href"):
-                nested_val = image_val.get(nested_key)
-                if isinstance(nested_val, str) and nested_val.strip():
-                    return nested_val
+        url = _normalize_image(variant.get(key))
+        if url:
+            return url
     return None
 
 def parse_product_card(card: BeautifulSoup, page: int) -> dict:
@@ -132,7 +145,7 @@ def parse_product_details_html(url: str, html: str, *, expand_variant_pages: boo
         if sku and img:
             image_by_sku[sku] = img
     if current_ld and current_ld.get("sku_id") and current_ld.get("image"):
-        image_by_sku[str(current_ld["sku_id"])] = current_ld["image"]
+        image_by_sku[str(current_ld["sku_id"])] = _normalize_image(current_ld["image"])
 
     size_prices = parse_size_prices(html, fetch_missing=expand_variant_pages)
     variants: list[dict] = [
@@ -192,7 +205,7 @@ def _extract_variant_from_json_ld(soup: BeautifulSoup) -> dict | None:
             "sku_id": sku_id,
             "volume_ml": _oz_to_ml(ld.get("size")),
             "price": parsed_price,
-            "image": ld.get("image"),
+            "image": _normalize_image(ld.get("image")),
         }
     return None
 
